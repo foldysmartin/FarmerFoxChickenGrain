@@ -1,41 +1,29 @@
 data class State(val farmer: Position, val fox: Position, val chicken: Position, val grain: Position) {
     fun isValid(): Boolean {
-      return (!foxEatsChicken() && !chickenEatsTheGrain() && !containsInvalidPosition())
+      return (!foxEatsChicken() && !chickenEatsTheGrain())
     }
 
     fun potentialMoves(): Map<Moves, State> {
+        if (!isValid()) throw IllegalStateException("State $this is not legal")
         return moves()
             .map { it to move(it) }
             .filter { it.second.isValid() }.toMap()
     }
 
     private fun move(move: Moves): State{
-        when (move) {
-            Moves.FarmerRight -> return this.copy(farmer = this.farmer.moveRight())
-            Moves.FarmerLeft -> return this.copy(farmer = this.farmer.moveLeft())
-            Moves.FoxRight -> {
-                val state = move(Moves.FarmerRight)
-                return state.copy(fox = state.fox.moveRight())
+        return when (move) {
+            Moves.Farmer -> this.copy(farmer = this.farmer.move())
+            Moves.Fox -> {
+                val state = move(Moves.Farmer)
+                state.copy(fox = state.fox.move())
             }
-            Moves.FoxLeft -> {
-                val state = move(Moves.FarmerLeft)
-                return state.copy(fox = state.fox.moveLeft())
+            Moves.Chicken -> {
+                val state = move(Moves.Farmer)
+                state.copy(chicken = state.chicken.move())
             }
-            Moves.ChickenRight -> {
-                val state = move(Moves.FarmerRight)
-                return state.copy(chicken = state.chicken.moveRight())
-            }
-            Moves.ChickenLeft -> {
-                val state = move(Moves.FarmerLeft)
-                return state.copy(chicken = state.chicken.moveLeft())
-            }
-            Moves.GrainRight -> {
-                val state = move(Moves.FarmerRight)
-                return state.copy(grain = state.grain.moveRight())
-            }
-            Moves.GrainLeft -> {
-                val state = move(Moves.FarmerLeft)
-                return state.copy(grain = state.grain.moveLeft())
+            Moves.Grain -> {
+                val state = move(Moves.Farmer)
+                state.copy(grain = state.grain.move())
             }
         }
     }
@@ -47,13 +35,6 @@ data class State(val farmer: Position, val fox: Position, val chicken: Position,
     private fun chickenEatsTheGrain() : Boolean {
         return (chicken == grain) && (chicken != farmer)
     }
-
-    private fun containsInvalidPosition(): Boolean {
-        return farmer.isInvalid() || fox.isInvalid() || chicken.isInvalid() || grain.isInvalid()
-    }
-
-    private fun Boolean.toInt() = if (this) 1 else 0
-
 }
 
 

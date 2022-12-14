@@ -1,21 +1,13 @@
 fun moves() = arrayListOf(
-    Moves.FarmerRight,
-    Moves.FarmerLeft,
-    Moves.FoxRight,
-    Moves.FoxLeft,
-    Moves.ChickenRight,
-    Moves.ChickenLeft,
-    Moves.GrainRight,
-    Moves.GrainLeft
+    Moves.Farmer,
+    Moves.Fox,
+    Moves.Chicken,
+    Moves.Grain
 )
 
 enum class Moves {
-    FarmerRight,
-    FarmerLeft,
-    FoxRight,
-    FoxLeft,
-    ChickenRight,
-    ChickenLeft,
-    GrainRight,
-    GrainLeft
+    Farmer,
+    Fox,
+    Chicken,
+    Grain
 }
