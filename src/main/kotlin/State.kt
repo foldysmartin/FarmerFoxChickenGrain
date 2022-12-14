@@ -1,6 +1,6 @@
 data class State(val farmer: Position, val fox: Position, val chicken: Position, val grain: Position) {
     fun isValid(): Boolean {
-      return (!foxEatsChicken() && !chickenEatsTheGrain() && !isDrowning() && !containsInvalidPosition())
+      return (!foxEatsChicken() && !chickenEatsTheGrain() && !containsInvalidPosition())
     }
 
     fun potentialMoves(): Map<Moves, State> {
@@ -50,18 +50,6 @@ data class State(val farmer: Position, val fox: Position, val chicken: Position,
 
     private fun containsInvalidPosition(): Boolean {
         return farmer.isInvalid() || fox.isInvalid() || chicken.isInvalid() || grain.isInvalid()
-    }
-
-    private fun isDrowning() : Boolean {
-        return if (farmer != Position.RIVER) {
-            itemsInTheRiver() > 0
-        }else {
-            itemsInTheRiver() > 1
-        }
-    }
-
-    private fun itemsInTheRiver() : Int {
-        return fox.isInRiver().toInt() + chicken.isInRiver().toInt() + grain.isInRiver().toInt()
     }
 
     private fun Boolean.toInt() = if (this) 1 else 0

@@ -22,25 +22,13 @@ internal class StateValidationTest {
 
     @Test
     fun chickenAndFoxCannotBeAlone() {
-        val state = State(Position.RIVER, Position.LEFT, Position.LEFT, Position.RIVER)
+        val state = State(Position.RIGHT, Position.LEFT, Position.LEFT, Position.RIGHT)
         assert(!state.isValid())
     }
 
     @Test
     fun chickenAndGrainCannotBeAlone() {
-        val state = State(Position.RIVER, Position.RIVER, Position.LEFT, Position.LEFT)
-        assert(!state.isValid())
-    }
-
-    @Test
-    fun chickenMustNotBeWithoutTheFarmerInTheRiver() {
-        val state = State(Position.LEFT, Position.LEFT, Position.RIVER, Position.LEFT)
-        assert(!state.isValid())
-    }
-
-    @Test
-    fun farmerCanOnlyCarryOneItem() {
-        val state = State(Position.RIVER, Position.RIVER, Position.RIVER, Position.LEFT)
+        val state = State(Position.RIGHT, Position.RIGHT, Position.LEFT, Position.LEFT)
         assert(!state.isValid())
     }
 }
