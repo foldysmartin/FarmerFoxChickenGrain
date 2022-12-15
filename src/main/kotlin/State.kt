@@ -1,6 +1,6 @@
 data class State(val farmer: Position, val fox: Position, val chicken: Position, val grain: Position) {
     fun isValid(): Boolean {
-      return (!foxEatsChicken() && !chickenEatsTheGrain())
+        return (!foxEatsChicken() && !chickenEatsTheGrain())
     }
 
     fun potentialMoves(): Map<Moves, State> {
@@ -10,7 +10,7 @@ data class State(val farmer: Position, val fox: Position, val chicken: Position,
             .filter { it.second.isValid() }.toMap()
     }
 
-    private fun move(move: Moves): State{
+    private fun move(move: Moves): State {
         return when (move) {
             Moves.Farmer -> this.copy(farmer = this.farmer.move())
             Moves.Fox -> {
@@ -28,11 +28,11 @@ data class State(val farmer: Position, val fox: Position, val chicken: Position,
         }
     }
 
-    private fun foxEatsChicken() : Boolean {
+    private fun foxEatsChicken(): Boolean {
         return (fox == chicken) && (fox != farmer)
     }
 
-    private fun chickenEatsTheGrain() : Boolean {
+    private fun chickenEatsTheGrain(): Boolean {
         return (chicken == grain) && (chicken != farmer)
     }
 }

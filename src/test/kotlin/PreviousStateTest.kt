@@ -8,7 +8,7 @@ internal class PreviousStateTest {
     fun endStateReturnsPreviousState() {
         val state = State(Position.RIGHT, Position.RIGHT, Position.RIGHT, Position.RIGHT)
         val previousState = mapOf(Moves.Chicken to State(Position.LEFT, Position.RIGHT, Position.LEFT, Position.RIGHT))
-        assertEquals(previousState, state.potentialMoves() )
+        assertEquals(previousState, state.potentialMoves())
     }
 
     @Test
@@ -25,6 +25,6 @@ internal class PreviousStateTest {
     @Test
     fun cannotMoveFromAnInvalidState() {
         val state = State(Position.RIGHT, Position.LEFT, Position.LEFT, Position.RIGHT)
-        assertThrows<IllegalStateException> {  state.potentialMoves () }
+        assertThrows<IllegalStateException> { state.potentialMoves() }
     }
 }
