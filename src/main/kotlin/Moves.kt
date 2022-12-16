@@ -8,22 +8,22 @@ fun moves() = arrayListOf(
 enum class Moves {
     Farmer {
         override fun toString(): String {
-            return "Move Alone"
+            return "Move Alone\n"
         }
     },
     Fox {
         override fun toString(): String {
-            return "Move With Fox"
+            return "Move With Fox\n"
         }
     },
     Chicken {
         override fun toString(): String {
-            return "Move With Chicken"
+            return "Move With Chicken\n"
         }
     },
     Grain {
         override fun toString(): String {
-            return "Move With Grain"
+            return "Move With Grain\n"
         }
     },
 }
